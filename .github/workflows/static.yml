@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kelvin Kosgei Portfolio</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      scroll-behavior: smooth;
+      background-color: black;   /* Black background */
+      color: blue;               /* Blue text */
+    }
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: black;         /* Black navbar */
+      padding: 10px;
+      z-index: 1000;
+      border-bottom: 1px solid blue; /* subtle blue line */
+    }
+    nav a {
+      color: blue;               /* Blue links */
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    section {
+      height: 100vh;
+      padding: 80px 50px;
+    }
+    h1 {
+      color: blue;               /* Headings in blue */
+    }
+    a {
+      color: blue;               /* Links in blue */
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
+  <!-- Sections -->
+  <section id="about">
+    <h1>About Me</h1>
+    <p>Hello! I’m <strong>Kelvin Kosgei</strong>, a student at Kabarak University pursuing a Diploma in Business Information Technology. 
+       I’m passionate about system design, documentation, and building professional-grade projects.</p>
+  </section>
+
+  <section id="projects">
+    <h1>My Projects</h1>
+    <ul>
+      <li>CyberSavvy Documentation Project — detailed academic and technical system design.</li>
+      <li>Portfolio Website — the very site you’re viewing, designed and coded by me.</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h1>Contact</h1>
+    <p>Email: <a href="mailto:kelvinkosgei538@gmail.com">kelvinkosgei538@gmail.com</a></p>
+    <p>Phone: <a href="tel:+254740727560">0740727560</a></p>
+  </section>
+</body>
+</html>
+
+# Simple workflow for deploying static content to GitHub Pages
+name: Deploy static content to Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Single deploy job since we're just deploying
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: '.'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
